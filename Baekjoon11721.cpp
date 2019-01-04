@@ -1,10 +1,10 @@
-#include <cstdio>
-
+#include <iostream>
+using namespace std;
 char a[100];
 
 int main() {
 
-	while (scanf_s("%10s", a) == 1) {
+	while (scanf_s("%10s", a, sizeof(a)) == 1) {
 
 		printf("%s\n", a);
 
@@ -16,5 +16,5 @@ int main() {
 
 
 /*
-열 개씩 끊어 출력하기
+긴 문자열을 입력 받았을 때, 열 개씩 끊어 출력하기
 */
