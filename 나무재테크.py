@@ -11,6 +11,8 @@ read = lambda : sys.stdin.readline().strip()
 N,M,K = map(int, read().split())#NxN의 땅에, M개의 나무를 심음,K년이 지난후 살아있는 나무의 개수를 구하라
 A = [list(map(int, read().split())) for _ in range(N)]#겨울에 심는 양분의 양과 좌표
 B = {} #좌표를 key로 가지고, 나무의 나이를 value 로 하는 dictionary
+dro = [-1,-1,-1,0,0,1,1,1]
+dco = [-1,0,1,-1,1,-1,0,1]
 for j in range(1, N+1):
     for i in range(1, N+1):
         B[(j,i)]=[]
@@ -28,20 +30,20 @@ def Spring():
     for j in range(1,N+1):
         for i in range(1, N+1):
             # if B.get((i,j)) != None:
-            B[(i,j)].sort()
+            # B[(i,j)].sort()
             #lilen = len(B[(i,j)])
-            for k in range(len(B[(i,j)])):
+            for k in range(len(B[(i,j)]))[::-1]: #역순for문
                 # print(B[(i,j)][k],energy[i-1][j-1])
-                if B[(i,j)][k] <= energy[i-1][j-1]:
-                    energy[i-1][j-1] -= B[(i,j)][k]
-                    B[(i,j)][k] += 1
+                if B[(i,j)][k] > energy[i-1][j-1]:
+                    for P in B[(i,j)][:k+1]:
+                        energy[i-1][j-1] += P//2#여름 부분
+                        # print('At the (',i,j,')Energy' ,SumrEnergy[i-1][j-1],'saved!')
+                    B[(i,j)] = B[(i,j)][k+1:]
+                    break
                     # print('TreeGrow!!')
                 else :
-                    for P in B[(i,j)][k:]:
-                        energy[i-1][j-1] += P//2
-                        # print('At the (',i,j,')Energy' ,SumrEnergy[i-1][j-1],'saved!')
-                    B[(i,j)] = B[(i,j)][:k]
-                    break
+                    energy[i-1][j-1] -= B[(i,j)][k]
+                    B[(i,j)][k] += 1
                      
 
 # def Summer() :
@@ -52,29 +54,30 @@ def Spring():
 def Autumn() :
     for j in range(1,N+1):
         for i in range(1, N+1):
+            energy[i-1][j-1] += A[i-1][j-1]#겨울
             # if B.get((i,j)) != None:
-                for k in range(len(B[(i,j)])):
-                    if B[(i,j)][k]%5 == 0:
-                        dro = [-1,-1,-1,0,0,1,1,1]
-                        dco = [-1,0,1,-1,1,-1,0,1]
-                        for p in range(8):
-                            nro = dro[p]+i
-                            nco = dco[p]+j
-                            if 0 < nro <= N and 0 < nco <= N:
-                                # print(nro,nco)
-                                B[(nro,nco)].append(1)
+            for k in range(len(B[(i,j)])):
+                if B[(i,j)][k] < 5:
+                    break
+                if B[(i,j)][k]%5 == 0:
+                    for p in range(8):
+                        nro = dro[p]+i
+                        nco = dco[p]+j
+                        if 0 < nro <= N and 0 < nco <= N:
+                            # print(nro,nco)
+                            B[(nro,nco)].append(1)
                             
-def Winter() :
-    for i in range(N):
-        for j in range(N):
-            energy[i][j] += A[i][j]
+# def Winter() :
+#     for i in range(N):
+#         for j in range(N):
+#             energy[i][j] += A[i][j]
     # print(energy)
 
 while K:
     Spring()
     # Summer()
     Autumn()
-    Winter()
+    # Winter()
     K -= 1
 
 #### 남은 나무 숫자세기
@@ -87,4 +90,7 @@ for j in range(1,N+1):
 print(TreeNum)
 
 ### 시간초과 발생
-### 여름 함수를 없애고, 봄이랑 합쳐 중복 제거를 통해 해결!
+### 여름,겨울 함수를 없애고, 봄,가을과 합쳐 중복 제거를 통해 단축
+### sort 사용 할 필요가 없다, for 문 역순 탐색 이용 추가되는 나무는 항상 어리다
+### 적절한 break 문 사용으로, 쓸데없는 계산을 줄일수 있음 하지만, 되려 시간복잡도를 늘릴수도 있음
+### 메모이제이션, 쓸데없는 연산 피하기, 중복제거중복제거
