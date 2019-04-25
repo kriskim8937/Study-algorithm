@@ -1,7 +1,9 @@
 # 입력 :
+
 scanf("%d %d", &a, &b);
-	for (int i = 0; i < n; i++)
+
  int a[30];
+for (int i = 0; i < n; i++)
 {
   scanf("%d", &a[i]);
   sum += a[i];
