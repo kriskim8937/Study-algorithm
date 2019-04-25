@@ -1,12 +1,19 @@
 # 입력 :
 
-scanf("%d %d", &a, &b);
+1. scanf("%d %d", &a, &b);
 
- int a[30];
+2. 배열 입력
+
+```c++
+int a[30];
 for (int i = 0; i < n; i++)
 {
   scanf("%d", &a[i]);
   sum += a[i];
-} // 배열 입력
+} 
+```
+3.
+scanf("%[^\n]s",input);
+
 # 출력 :
 printf("%d\n", a+b); // 줄바꿈 출력
