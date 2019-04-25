@@ -22,4 +22,9 @@ scanf("%[^\n]s",input);
 1. 줄바꿈 출력
 ```
 printf("%d\n", a+b);
+printf("%s\n", a); // 문자열 출력
+%f 실수, float
+%c 문자, char
+\n 줄바꿈
+\t 탭
 ```
