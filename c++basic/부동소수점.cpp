@@ -21,5 +21,5 @@ int main(void) {
 	for (int i = 0; i < N; i++) {
 		sum += ((a[i] / maxN) * 100);
 	}
-	printf("%.2f", sum/N);
+	printf("%.2f", sum/N); //소수 2번째자리 까지 출력 앞에 숫자 붙이면 공백출력(15.2f)
 }
