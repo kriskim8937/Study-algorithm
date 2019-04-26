@@ -13,6 +13,10 @@ for (int i = 0; i < n; i++)
   scanf("%d", &a[i]);
   sum += a[i];
 } 
+char map[101][101];
+for (int i = 0; i < N; i++) {
+	scanf("%s", map[i]);
+}
 ```
 3. 공백 구분 없이 입력
 ```
@@ -45,3 +49,9 @@ printf("%s\n", a); // 문자열 출력
 \t 탭
 ```
 2. puts() - puts() 함수는 문자열을 화면에 출력하고 printf()함수와는 다르게 자동으로 줄이 바뀝니다.
+3.2차원 문자열 출력
+```
+	for (i = 0; i < N; i++) {
+			printf("%s", map[i]);
+	}
+```
