@@ -19,3 +19,13 @@ include <queue>
 include <stack>
 //push(),pop(),size(),empty(),top()
 ```
+## pair
+```
+ #include <utility>
+ 두 자료형을 묶을 수 있다. 
+ pair<int,int> p1;
+ p1 = make_pair(10,20);
+ printf("%d",p1.first)
+ printf("%d",p1.second)
+//
+```
